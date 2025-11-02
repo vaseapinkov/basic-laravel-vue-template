@@ -1,8 +1,11 @@
 <script setup>
 import { useForm, Link } from '@inertiajs/vue3'
+import { useI18n } from 'vue-i18n'
 import AppLayout from '../../Layouts/AppLayout.vue'
 import Button from '../../Components/Button.vue'
 import Input from '../../Components/Input.vue'
+
+const { t } = useI18n()
 
 const form = useForm({
   name: '',
@@ -20,18 +23,18 @@ const submit = () => {
 
 <template>
   <AppLayout
-    title="Create Account"
+    :title="t('auth.register.title')"
     description="Create a new account to get started with Laravel and unlock powerful features."
   >
     <div class="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-screen">
       <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-white">
-          Create your account
+          {{ t('auth.register.title') }}
         </h2>
         <p class="mt-2 text-center text-sm text-gray-400">
-          Or
+          {{ t('auth.register.have_account') }}
           <Link href="/login" class="font-medium text-indigo-400 hover:text-indigo-300">
-            sign in to your existing account
+            {{ t('auth.register.login_link') }}
           </Link>
         </p>
       </div>
@@ -43,7 +46,7 @@ const submit = () => {
               id="name"
               v-model="form.name"
               type="text"
-              label="Full name"
+              :label="t('auth.register.name')"
               :error="form.errors.name"
               autocomplete="name"
               required
@@ -53,7 +56,7 @@ const submit = () => {
               id="email"
               v-model="form.email"
               type="email"
-              label="Email address"
+              :label="t('auth.register.email')"
               :error="form.errors.email"
               autocomplete="email"
               required
@@ -63,7 +66,7 @@ const submit = () => {
               id="password"
               v-model="form.password"
               type="password"
-              label="Password"
+              :label="t('auth.register.password')"
               :error="form.errors.password"
               autocomplete="new-password"
               required
@@ -73,13 +76,13 @@ const submit = () => {
               id="password_confirmation"
               v-model="form.password_confirmation"
               type="password"
-              label="Confirm password"
+              :label="t('auth.register.password_confirmation')"
               autocomplete="new-password"
               required
             />
 
             <Button type="submit" :loading="form.processing" class="w-full">
-              Create account
+              {{ t('auth.register.submit') }}
             </Button>
           </form>
         </div>

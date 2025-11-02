@@ -1,7 +1,11 @@
 <script setup>
 import { Head, Link, usePage, router } from '@inertiajs/vue3'
 import { computed } from 'vue'
+import { useI18n } from 'vue-i18n'
 import Button from '../Components/Button.vue'
+import LanguageSwitcher from '../Components/LanguageSwitcher.vue'
+
+const { t } = useI18n()
 
 defineProps({
   title: {
@@ -72,27 +76,28 @@ const logout = () => {
                     </button>
                 </div>
                 <div class="hidden lg:flex lg:gap-x-12">
-                    <a href="#" class="text-sm/6 font-semibold text-white">Product</a>
-                    <a href="#" class="text-sm/6 font-semibold text-white">Features</a>
-                    <a href="#" class="text-sm/6 font-semibold text-white">Marketplace</a>
-                    <a href="#" class="text-sm/6 font-semibold text-white">Company</a>
+                    <a href="#" class="text-sm/6 font-semibold text-white">{{ t('nav.product') }}</a>
+                    <a href="#" class="text-sm/6 font-semibold text-white">{{ t('nav.features') }}</a>
+                    <a href="#" class="text-sm/6 font-semibold text-white">{{ t('nav.marketplace') }}</a>
+                    <a href="#" class="text-sm/6 font-semibold text-white">{{ t('nav.company') }}</a>
                 </div>
                 <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4 lg:items-center">
+                    <LanguageSwitcher />
                     <template v-if="user">
                         <span class="text-sm text-gray-300">{{ user.name }}</span>
                         <Button variant="ghost" @click="logout">
-                            Log out
+                            {{ t('nav.logout') }}
                         </Button>
                     </template>
                     <template v-else>
                         <Link href="/login" class="text-sm/6 font-semibold text-white hover:text-gray-300">
-                            Log in <span aria-hidden="true">&rarr;</span>
+                            {{ t('nav.login') }} <span aria-hidden="true">&rarr;</span>
                         </Link>
                         <Link
                             href="/register"
                             class="rounded-md bg-indigo-500 px-3.5 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-400"
                         >
-                            Sign up
+                            {{ t('nav.register') }}
                         </Link>
                     </template>
                 </div>
@@ -137,32 +142,35 @@ const logout = () => {
                                     <a
                                         href="#"
                                         class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
-                                    >Product</a
+                                    >{{ t('nav.product') }}</a
                                     >
                                     <a
                                         href="#"
                                         class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
-                                    >Features</a
+                                    >{{ t('nav.features') }}</a
                                     >
                                     <a
                                         href="#"
                                         class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
-                                    >Marketplace</a
+                                    >{{ t('nav.marketplace') }}</a
                                     >
                                     <a
                                         href="#"
                                         class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
-                                    >Company</a
+                                    >{{ t('nav.company') }}</a
                                     >
                                 </div>
                                 <div class="py-6 space-y-2">
+                                    <div class="-mx-3 px-3 py-2">
+                                        <LanguageSwitcher />
+                                    </div>
                                     <template v-if="user">
                                         <div class="-mx-3 px-3 py-2 text-base/7 text-gray-300">
                                             {{ user.name }}
                                         </div>
                                         <Button variant="ghost" @click="logout"
                                         >
-                                            Log out
+                                            {{ t('nav.logout') }}
                                         </Button>
                                     </template>
                                     <template v-else>
@@ -170,13 +178,13 @@ const logout = () => {
                                             href="/login"
                                             class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-white hover:bg-white/5"
                                         >
-                                            Log in
+                                            {{ t('nav.login') }}
                                         </Link>
                                         <Link
                                             href="/register"
                                             class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-indigo-400 hover:bg-white/5"
                                         >
-                                            Sign up
+                                            {{ t('nav.register') }}
                                         </Link>
                                     </template>
                                 </div>

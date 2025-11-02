@@ -1,8 +1,11 @@
 <script setup>
 import { useForm, Link } from '@inertiajs/vue3'
+import { useI18n } from 'vue-i18n'
 import AppLayout from '../../Layouts/AppLayout.vue'
 import Button from '../../Components/Button.vue'
 import Input from '../../Components/Input.vue'
+
+const { t } = useI18n()
 
 const form = useForm({
   email: '',
@@ -19,18 +22,18 @@ const submit = () => {
 
 <template>
   <AppLayout
-    title="Sign In"
+    :title="t('auth.login.title')"
     description="Sign in to your account to access your dashboard and manage your data."
   >
     <div class="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-screen">
       <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-white">
-          Sign in to your account
+          {{ t('auth.login.title') }}
         </h2>
         <p class="mt-2 text-center text-sm text-gray-400">
-          Or
+          {{ t('auth.login.no_account') }}
           <Link href="/register" class="font-medium text-indigo-400 hover:text-indigo-300">
-            create a new account
+            {{ t('auth.login.register_link') }}
           </Link>
         </p>
       </div>
@@ -42,7 +45,7 @@ const submit = () => {
               id="email"
               v-model="form.email"
               type="email"
-              label="Email address"
+              :label="t('auth.login.email')"
               :error="form.errors.email"
               autocomplete="email"
               required
@@ -52,7 +55,7 @@ const submit = () => {
               id="password"
               v-model="form.password"
               type="password"
-              label="Password"
+              :label="t('auth.login.password')"
               :error="form.errors.password"
               autocomplete="current-password"
               required
@@ -66,12 +69,12 @@ const submit = () => {
                 class="h-4 w-4 rounded border-gray-600 bg-white/5 text-indigo-500 focus:ring-indigo-500 focus:ring-offset-gray-900"
               />
               <label for="remember" class="ml-2 block text-sm text-gray-300">
-                Remember me
+                {{ t('auth.login.remember_me') }}
               </label>
             </div>
 
             <Button type="submit" :loading="form.processing" class="w-full">
-              Sign in
+              {{ t('auth.login.submit') }}
             </Button>
           </form>
         </div>
