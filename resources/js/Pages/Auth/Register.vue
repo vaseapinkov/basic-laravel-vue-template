@@ -19,7 +19,10 @@ const submit = () => {
 </script>
 
 <template>
-  <AppLayout>
+  <AppLayout
+    title="Create Account"
+    description="Create a new account to get started with Laravel and unlock powerful features."
+  >
     <div class="flex flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-screen">
       <div class="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 class="mt-6 text-center text-3xl font-bold tracking-tight text-white">

@@ -1,18 +1,39 @@
 <script setup>
-import {Link, usePage, router} from '@inertiajs/vue3'
-import {computed} from 'vue'
-import Button from "../Components/Button.vue";
+import { Head, Link, usePage, router } from '@inertiajs/vue3'
+import { computed } from 'vue'
+import Button from '../Components/Button.vue'
+
+defineProps({
+  title: {
+    type: String,
+    default: 'Welcome',
+  },
+  description: {
+    type: String,
+    default: 'A modern Laravel + Vue + Inertia application',
+  },
+})
 
 const page = usePage()
 const user = computed(() => page.props.auth.user)
 
 const logout = () => {
-    router.post('/logout')
+  router.post('/logout')
 }
 </script>
 
 <template>
-    <div class="bg-gray-900 min-h-screen">
+  <div class="bg-gray-900 min-h-screen">
+    <Head>
+      <title>{{ title }} - Laravel</title>
+      <meta name="description" :content="description" />
+      <meta property="og:title" :content="`${title} - Laravel`" />
+      <meta property="og:description" :content="description" />
+      <meta property="og:type" content="website" />
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" :content="`${title} - Laravel`" />
+      <meta name="twitter:description" :content="description" />
+    </Head>
         <header class="absolute inset-x-0 top-0 z-50">
             <nav aria-label="Global" class="flex items-center justify-between p-6 lg:px-8">
                 <div class="flex lg:flex-1">

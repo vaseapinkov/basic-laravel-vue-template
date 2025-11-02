@@ -3,7 +3,10 @@ import AppLayout from '../Layouts/AppLayout.vue'
 </script>
 
 <template>
-  <AppLayout>
+  <AppLayout
+    title="Home"
+    description="Data to enrich your online business. Get started with our modern Laravel + Vue + Inertia application template."
+  >
     <!-- Code from: https://tailwindcss.com/plus/ui-blocks/marketing/page-examples/landing-pages -->
     <div class="relative isolate px-6 pt-14 lg:px-8">
       <div
