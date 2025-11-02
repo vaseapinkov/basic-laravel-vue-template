@@ -1,4 +1,4 @@
-import { createI18n } from 'vue-i18n'
+import { createI18n } from 'vue-i18n';
 
 const messages = {
     en: {
@@ -37,7 +37,8 @@ const messages = {
             announcement: 'Announcing our next round of funding.',
             read_more: 'Read more',
             hero_title: 'Data to enrich your online business',
-            hero_description: 'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat.',
+            hero_description:
+                'Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat.',
             get_started: 'Get started',
             learn_more: 'Learn more',
         },
@@ -78,24 +79,25 @@ const messages = {
             announcement: 'Объявляем о следующем раунде финансирования.',
             read_more: 'Подробнее',
             hero_title: 'Данные для развития вашего онлайн-бизнеса',
-            hero_description: 'Создавайте современные веб-приложения с помощью Laravel и Vue 3. Быстрая разработка, удобная архитектура и готовые компоненты.',
+            hero_description:
+                'Создавайте современные веб-приложения с помощью Laravel и Vue 3. Быстрая разработка, удобная архитектура и готовые компоненты.',
             get_started: 'Начать',
             learn_more: 'Узнать больше',
         },
     },
-}
+};
 
 // Get locale from localStorage or default to 'en'
-const savedLocale = localStorage.getItem('locale') || 'en'
+const savedLocale = localStorage.getItem('locale') || 'en';
 
 export const i18n = createI18n({
     legacy: false, // Use Composition API mode
     locale: savedLocale,
     fallbackLocale: 'en',
     messages,
-})
+});
 
 export function setLocale(locale) {
-    i18n.global.locale.value = locale
-    localStorage.setItem('locale', locale)
+    i18n.global.locale.value = locale;
+    localStorage.setItem('locale', locale);
 }

@@ -2,10 +2,10 @@
     <div class="relative">
         <button
             @click="isOpen = !isOpen"
-            class="inline-flex items-center gap-2 px-4 py-2.5 rounded-md border border-transparent bg-gray-700 text-white text-sm font-semibold shadow-sm hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors duration-200"
+            class="inline-flex items-center gap-2 rounded-md border border-transparent bg-gray-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors duration-200 hover:bg-gray-600 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900 focus:outline-none"
         >
             <svg
-                class="w-5 h-5"
+                class="h-5 w-5"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -19,7 +19,7 @@
             </svg>
             <span>{{ currentLocaleLabel }}</span>
             <svg
-                class="w-4 h-4 transition-transform duration-200"
+                class="h-4 w-4 transition-transform duration-200"
                 :class="{ 'rotate-180': isOpen }"
                 fill="none"
                 stroke="currentColor"
@@ -44,14 +44,14 @@
         >
             <div
                 v-if="isOpen"
-                class="absolute right-0 mt-2 w-48 rounded-md border border-gray-700 bg-gray-800 shadow-lg ring-1 ring-white/10 z-50"
+                class="absolute right-0 z-50 mt-2 w-48 rounded-md border border-gray-700 bg-gray-800 shadow-lg ring-1 ring-white/10"
             >
                 <div class="py-1">
                     <button
                         v-for="lang in languages"
                         :key="lang.code"
                         @click="changeLocale(lang.code)"
-                        class="w-full px-4 py-2 text-left text-white hover:bg-gray-700 transition-colors duration-200 flex items-center gap-3"
+                        class="flex w-full items-center gap-3 px-4 py-2 text-left text-white transition-colors duration-200 hover:bg-gray-700"
                         :class="{
                             'bg-gray-700': currentLocale === lang.code,
                         }"
@@ -60,7 +60,7 @@
                         <span class="text-sm">{{ lang.label }}</span>
                         <svg
                             v-if="currentLocale === lang.code"
-                            class="w-4 h-4 ml-auto text-green-500"
+                            class="ml-auto h-4 w-4 text-green-500"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                         >
@@ -78,39 +78,42 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
-import { useI18n } from 'vue-i18n'
-import { setLocale } from '../i18n'
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { setLocale } from '../i18n';
 
-const { locale } = useI18n()
-const isOpen = ref(false)
+const { locale } = useI18n();
+const isOpen = ref(false);
 
 const languages = [
     { code: 'en', label: 'English', flag: '🇬🇧' },
     { code: 'ru', label: 'Русский', flag: '🇷🇺' },
-]
+];
 
-const currentLocale = computed(() => locale.value)
+const currentLocale = computed(() => locale.value);
 const currentLocaleLabel = computed(() => {
-    return languages.find(lang => lang.code === currentLocale.value)?.label || 'English'
-})
+    return (
+        languages.find((lang) => lang.code === currentLocale.value)?.label ||
+        'English'
+    );
+});
 
 function changeLocale(newLocale) {
-    setLocale(newLocale)
-    isOpen.value = false
+    setLocale(newLocale);
+    isOpen.value = false;
 }
 
 function handleClickOutside(event) {
     if (isOpen.value && !event.target.closest('.relative')) {
-        isOpen.value = false
+        isOpen.value = false;
     }
 }
 
 onMounted(() => {
-    document.addEventListener('click', handleClickOutside)
-})
+    document.addEventListener('click', handleClickOutside);
+});
 
 onBeforeUnmount(() => {
-    document.removeEventListener('click', handleClickOutside)
-})
+    document.removeEventListener('click', handleClickOutside);
+});
 </script>

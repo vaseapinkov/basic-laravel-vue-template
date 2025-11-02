@@ -1,45 +1,48 @@
 <script setup>
-import { Head, Link, usePage, router } from '@inertiajs/vue3'
-import { computed } from 'vue'
-import { useI18n } from 'vue-i18n'
-import Button from '../Components/Button.vue'
-import LanguageSwitcher from '../Components/LanguageSwitcher.vue'
+import { Head, Link, router, usePage } from '@inertiajs/vue3';
+import { computed } from 'vue';
+import { useI18n } from 'vue-i18n';
+import Button from '../Components/Button.vue';
+import LanguageSwitcher from '../Components/LanguageSwitcher.vue';
 
-const { t } = useI18n()
+const { t } = useI18n();
 
 defineProps({
-  title: {
-    type: String,
-    default: 'Welcome',
-  },
-  description: {
-    type: String,
-    default: 'A modern Laravel + Vue + Inertia application',
-  },
-})
+    title: {
+        type: String,
+        default: 'Welcome',
+    },
+    description: {
+        type: String,
+        default: 'A modern Laravel + Vue + Inertia application',
+    },
+});
 
-const page = usePage()
-const user = computed(() => page.props.auth.user)
+const page = usePage();
+const user = computed(() => page.props.auth.user);
 
 const logout = () => {
-  router.post('/logout')
-}
+    router.post('/logout');
+};
 </script>
 
 <template>
-  <div class="bg-gray-900 min-h-screen">
-    <Head>
-      <title>{{ title }} - Laravel</title>
-      <meta name="description" :content="description" />
-      <meta property="og:title" :content="`${title} - Laravel`" />
-      <meta property="og:description" :content="description" />
-      <meta property="og:type" content="website" />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" :content="`${title} - Laravel`" />
-      <meta name="twitter:description" :content="description" />
-    </Head>
+    <div class="min-h-screen bg-gray-900">
+        <Head>
+            <title>{{ title }} - Laravel</title>
+            <meta name="description" :content="description" />
+            <meta property="og:title" :content="`${title} - Laravel`" />
+            <meta property="og:description" :content="description" />
+            <meta property="og:type" content="website" />
+            <meta name="twitter:card" content="summary_large_image" />
+            <meta name="twitter:title" :content="`${title} - Laravel`" />
+            <meta name="twitter:description" :content="description" />
+        </Head>
         <header class="absolute inset-x-0 top-0 z-50">
-            <nav aria-label="Global" class="flex items-center justify-between p-6 lg:px-8">
+            <nav
+                aria-label="Global"
+                class="flex items-center justify-between p-6 lg:px-8"
+            >
                 <div class="flex lg:flex-1">
                     <Link href="/" class="-m-1.5 p-1.5">
                         <span class="sr-only">Your Company</span>
@@ -76,22 +79,38 @@ const logout = () => {
                     </button>
                 </div>
                 <div class="hidden lg:flex lg:gap-x-12">
-                    <a href="#" class="text-sm/6 font-semibold text-white">{{ t('nav.product') }}</a>
-                    <a href="#" class="text-sm/6 font-semibold text-white">{{ t('nav.features') }}</a>
-                    <a href="#" class="text-sm/6 font-semibold text-white">{{ t('nav.marketplace') }}</a>
-                    <a href="#" class="text-sm/6 font-semibold text-white">{{ t('nav.company') }}</a>
+                    <a href="#" class="text-sm/6 font-semibold text-white">{{
+                        t('nav.product')
+                    }}</a>
+                    <a href="#" class="text-sm/6 font-semibold text-white">{{
+                        t('nav.features')
+                    }}</a>
+                    <a href="#" class="text-sm/6 font-semibold text-white">{{
+                        t('nav.marketplace')
+                    }}</a>
+                    <a href="#" class="text-sm/6 font-semibold text-white">{{
+                        t('nav.company')
+                    }}</a>
                 </div>
-                <div class="hidden lg:flex lg:flex-1 lg:justify-end lg:gap-x-4 lg:items-center">
+                <div
+                    class="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:gap-x-4"
+                >
                     <LanguageSwitcher />
                     <template v-if="user">
-                        <span class="text-sm text-gray-300">{{ user.name }}</span>
+                        <span class="text-sm text-gray-300">{{
+                            user.name
+                        }}</span>
                         <Button variant="ghost" @click="logout">
                             {{ t('nav.logout') }}
                         </Button>
                     </template>
                     <template v-else>
-                        <Link href="/login" class="text-sm/6 font-semibold text-white hover:text-gray-300">
-                            {{ t('nav.login') }} <span aria-hidden="true">&rarr;</span>
+                        <Link
+                            href="/login"
+                            class="text-sm/6 font-semibold text-white hover:text-gray-300"
+                        >
+                            {{ t('nav.login') }}
+                            <span aria-hidden="true">&rarr;</span>
                         </Link>
                         <Link
                             href="/register"
@@ -132,7 +151,11 @@ const logout = () => {
                                     aria-hidden="true"
                                     class="size-6"
                                 >
-                                    <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path
+                                        d="M6 18 18 6M6 6l12 12"
+                                        stroke-linecap="round"
+                                        stroke-linejoin="round"
+                                    />
                                 </svg>
                             </button>
                         </div>
@@ -142,34 +165,35 @@ const logout = () => {
                                     <a
                                         href="#"
                                         class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
-                                    >{{ t('nav.product') }}</a
+                                        >{{ t('nav.product') }}</a
                                     >
                                     <a
                                         href="#"
                                         class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
-                                    >{{ t('nav.features') }}</a
+                                        >{{ t('nav.features') }}</a
                                     >
                                     <a
                                         href="#"
                                         class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
-                                    >{{ t('nav.marketplace') }}</a
+                                        >{{ t('nav.marketplace') }}</a
                                     >
                                     <a
                                         href="#"
                                         class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-white hover:bg-white/5"
-                                    >{{ t('nav.company') }}</a
+                                        >{{ t('nav.company') }}</a
                                     >
                                 </div>
-                                <div class="py-6 space-y-2">
+                                <div class="space-y-2 py-6">
                                     <div class="-mx-3 px-3 py-2">
                                         <LanguageSwitcher />
                                     </div>
                                     <template v-if="user">
-                                        <div class="-mx-3 px-3 py-2 text-base/7 text-gray-300">
+                                        <div
+                                            class="-mx-3 px-3 py-2 text-base/7 text-gray-300"
+                                        >
                                             {{ user.name }}
                                         </div>
-                                        <Button variant="ghost" @click="logout"
-                                        >
+                                        <Button variant="ghost" @click="logout">
                                             {{ t('nav.logout') }}
                                         </Button>
                                     </template>
@@ -195,6 +219,6 @@ const logout = () => {
             </dialog>
         </header>
 
-        <slot/>
+        <slot />
     </div>
 </template>
