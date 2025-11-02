@@ -133,6 +133,9 @@ php artisan pail
 composer setup          # Complete project setup
 composer dev           # Start all development services
 composer test          # Run tests
+composer format        # Format PHP code with Pint
+composer format:check  # Check PHP code style without modifying
+composer lint          # Run static analysis with PHPStan
 ```
 
 ### NPM Scripts
@@ -149,14 +152,15 @@ npm run lint           # Lint and fix with ESLint
 ### Code Quality
 
 ```bash
-# PHP code style (Laravel Pint)
-./vendor/bin/pint
+# PHP - Format code
+composer format            # Auto-fix code style with Pint
+composer format:check      # Check code style without modifying
 
-# Static analysis (PHPStan)
-./vendor/bin/phpstan analyse
+# PHP - Static analysis
+composer lint              # Run PHPStan
 
 # Run tests
-php artisan test
+composer test
 ```
 
 ## Project Structure
@@ -355,11 +359,21 @@ This template enforces code quality through:
 Run all quality checks before committing:
 
 ```bash
+# Frontend checks
 npm run format:check   # Check JS/Vue formatting
 npm run lint          # Check JS/Vue code quality
-./vendor/bin/pint --test  # Check PHP code style
-./vendor/bin/phpstan analyse  # Run static analysis
-php artisan test      # Run test suite
+
+# Backend checks
+composer format:check  # Check PHP code style
+composer lint         # Run static analysis
+composer test         # Run test suite
+```
+
+Or run everything at once:
+
+```bash
+# Frontend and Backend
+npm run format:check && npm run lint && composer format:check && composer lint && composer test
 ```
 
 ## Testing
